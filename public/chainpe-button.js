@@ -10,7 +10,7 @@
     
     const ChainPe = {
         config: {
-            apiUrl: 'http://localhost:8000',  // Update to your production URL
+            apiUrl: 'https://chainpe.onrender.com',  // Production URL
             buttonId: 'chainpe-payment-button',
             modalId: 'chainpe-modal'
         },
