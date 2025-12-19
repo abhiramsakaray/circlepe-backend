@@ -1,0 +1,78 @@
+services:
+  # Backend API Server
+  - type: web
+    name: chainpe-backend
+    runtime: python
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./chainpe.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: STELLAR_NETWORK
+        value: testnet
+      - key: STELLAR_HORIZON_URL
+        value: https://horizon-testnet.stellar.org
+      - key: USDC_ASSET_CODE
+        value: USDC
+      - key: USDC_ASSET_ISSUER
+        value: GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5
+      - key: PAYMENT_EXPIRY_MINUTES
+        value: 15
+      - key: WEBHOOK_RETRY_LIMIT
+        value: 3
+      - key: WEBHOOK_TIMEOUT_SECONDS
+        value: 10
+      - key: APP_HOST
+        value: 0.0.0.0
+      - key: APP_PORT
+        value: 8000
+      - key: CORS_ORIGINS
+        value: https://stellerfi.myshopify.com
+      - key: MERCHANT_SECRET_KEY
+        sync: false
+      - key: CONTRACT_ID
+        value: CAVIIE6XT5IX6FE3IBQJGKNCJR5AQWWAYMFQ2QQ2MEGZ6OW7C7XKCNUF
+
+  # Stellar Payment Listener (Background Worker)
+  - type: worker
+    name: chainpe-listener
+    runtime: python
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app.services.stellar_listener
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./chainpe.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: STELLAR_NETWORK
+        value: testnet
+      - key: STELLAR_HORIZON_URL
+        value: https://horizon-testnet.stellar.org
+      - key: USDC_ASSET_CODE
+        value: USDC
+      - key: USDC_ASSET_ISSUER
+        value: GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5
+      - key: PAYMENT_EXPIRY_MINUTES
+        value: 15
+      - key: WEBHOOK_RETRY_LIMIT
+        value: 3
+      - key: WEBHOOK_TIMEOUT_SECONDS
+        value: 10
+      - key: MERCHANT_SECRET_KEY
+        sync: false
+      - key: CONTRACT_ID
+        value: CAVIIE6XT5IX6FE3IBQJGKNCJR5AQWWAYMFQ2QQ2MEGZ6OW7C7XKCNUF
