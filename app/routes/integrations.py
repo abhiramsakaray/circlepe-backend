@@ -124,7 +124,7 @@ async def get_payment_button(api_key: str):
             cancel_url: cancelUrl
         }};
         
-        fetch('http://localhost:8000/integrations/create-checkout', {{
+        fetch('https://chainpe.onrender.com/integrations/create-checkout', {{
             method: 'POST',
             headers: {{'Content-Type': 'application/json'}},
             body: JSON.stringify(checkoutData)

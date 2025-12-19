@@ -25,9 +25,9 @@ class Settings(BaseSettings):
     # Application
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
-    APP_BASE_URL: str = "http://localhost:8000"
-    APP_URL: str = "http://localhost:8000"  # Alias for APP_BASE_URL
-    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:8000"
+    APP_BASE_URL: str = "https://chainpe.onrender.com"
+    APP_URL: str = "https://chainpe.onrender.com"  # Alias for APP_BASE_URL
+    CORS_ORIGINS: str = "*"
     
     # Admin
     ADMIN_EMAIL: str = "admin@paymentgateway.com"
