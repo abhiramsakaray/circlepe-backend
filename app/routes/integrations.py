@@ -49,7 +49,7 @@ async def create_simple_checkout(
     
     Returns:
     {
-        "checkout_url": "http://localhost:8000/checkout/pay_xxx",
+        "checkout_url": "https://chainpe.onrender.com/checkout/pay_xxx",
         "session_id": "pay_xxx"
     }
     """
@@ -209,7 +209,7 @@ async def shopify_install_page():
         
         <div class="step">
             <h3>Step 1: Get Your API Key</h3>
-            <p>Sign up at <code>http://localhost:8000/docs</code> and create a merchant account to get your API key.</p>
+            <p>Sign up at <code>https://chainpe.onrender.com/docs</code> and create a merchant account to get your API key.</p>
         </div>
         
         <div class="step">
@@ -224,7 +224,7 @@ async def shopify_install_page():
 &lt;button onclick="payWithChainPe()"&gt;Pay with Crypto&lt;/button&gt;
 &lt;script&gt;
 function payWithChainPe() {
-    fetch('http://localhost:8000/integrations/create-checkout', {
+    fetch('https://chainpe.onrender.com/integrations/create-checkout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -283,7 +283,7 @@ async def woocommerce_plugin_info():
             <h3>PHP Integration Example</h3>
             <pre><code>
 // Create ChainPe checkout
-$response = wp_remote_post('http://localhost:8000/integrations/create-checkout', array(
+$response = wp_remote_post('https://chainpe.onrender.com/integrations/create-checkout', array(
     'body' => json_encode(array(
         'api_key' => 'YOUR_API_KEY',
         'amount' => $order->get_total(),
